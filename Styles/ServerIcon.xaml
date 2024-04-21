@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="Lyra.Launcher.Styles.ServerIcon"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Lyra.Launcher.Styles"
+             mc:Ignorable="d"
+             Width="35" Height="35"
+             Margin="5,0,0,0"
+             d:DesignHeight="35" d:DesignWidth="35">
+    <UserControl.Resources>
+        <local:ImageConverter x:Key="ImageConverter"/>
+    </UserControl.Resources>
+    
+    <Border Name="Border" Width="35" Height="35" CornerRadius="17.5">
+        <Border.Background>
+            <ImageBrush ImageSource="{Binding IconURL, Converter={StaticResource ImageConverter}}" Stretch="UniformToFill"/>
+        </Border.Background>
+        <Button Cursor="Hand" Click="ButtonBase_OnClick">
+            <Button.Template>
+                <ControlTemplate>
+                    <Border CornerRadius="17.5" Background="Transparent"/>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+    </Border>
+    
+    <UserControl.Triggers>
+        <EventTrigger RoutedEvent="MouseEnter">
+            <BeginStoryboard>
+                <Storyboard>
+                    <ThicknessAnimation Duration="0:0:0.1" To="0,-3,0,0" Storyboard.TargetProperty="Margin" Storyboard.TargetName="Border"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="MouseLeave">
+            <BeginStoryboard>
+                <Storyboard>
+                    <ThicknessAnimation Duration="0:0:0.1" To="0,0,0,0" Storyboard.TargetProperty="Margin" Storyboard.TargetName="Border"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        
+        <EventTrigger RoutedEvent="MouseDown">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Duration="0:0:0.1" To="0.75" Storyboard.TargetProperty="Opacity"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="MouseUp">
+            <BeginStoryboard>
+                <Storyboard>
+                    <DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetProperty="Opacity"/>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </UserControl.Triggers>
+</UserControl>

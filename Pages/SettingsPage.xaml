@@ -1,0 +1,305 @@
+﻿<Page x:Class="Lyra.Launcher.Pages.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:Lyra.Launcher.Pages"
+      xmlns:styles="clr-namespace:Lyra.Launcher.Styles"
+      mc:Ignorable="d"
+      Title="SettingsPage" Height="410" Width="480">
+    <Page.Resources>
+        <local:HexToBrushConverter x:Key="HexToBrushConverter"/>
+    </Page.Resources>
+    <Border CornerRadius="15">
+        <Border.Background>
+            <SolidColorBrush Color="{DynamicResource BackgroundColor}"/>
+        </Border.Background>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="Settings" Style="{StaticResource TitleText}"/>
+            <ScrollViewer Grid.Row="1" Margin="0,10,10,0">
+                <StackPanel Margin="0,0,5,5">
+                    <TextBlock Margin="15,0,0,1" Text="General" Style="{StaticResource HeaderText}"/>
+                    <Grid>
+                        <TextBlock Text="Custom DLL" Style="{StaticResource NormalText}"/>
+                        <ToggleButton Name="CustomDLLButton"/>
+                    </Grid>
+                    <Expander IsExpanded="{Binding ElementName=CustomDLLButton, Path=IsChecked}">
+                        <TextBox Name="CustomDLLTextBox" Margin="25,0,0,0" Text="Hello World">
+                            <TextBox.Template>
+                                <ControlTemplate>
+                                    <Border Padding="3.5"  CornerRadius="8" Name="Border" BorderThickness="0">
+                                        <Border.BorderBrush>
+                                            <SolidColorBrush Color="{DynamicResource AccentColor}"/>
+                                        </Border.BorderBrush>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            <TextBox BorderThickness="0" FontSize="14" FontFamily="/Assets/#Inter" Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" CaretBrush="{DynamicResource ForegroundBrush}" Foreground="{DynamicResource ForegroundBrush}" Background="Transparent"/>
+                                            <Button Cursor="Hand" Click="ButtonBase_OnClick2" HorizontalAlignment="Right" Grid.Column="1" Height="17.5" Margin="0,0,2.5,0">
+                                                <Button.Template>
+                                                    <ControlTemplate>
+                                                        <Grid Background="Transparent" >
+                                                            <Viewbox RenderTransformOrigin="0.5,0.5">
+                                                                <Grid>
+                                                                    <ContentPresenter x:Name="MyContentPresenter">
+                                                                        <ContentPresenter.Content>
+                                                                            <Image Source="/Assets/folder.png"/>
+                                                                        </ContentPresenter.Content>
+                                                                    </ContentPresenter>
+                                                                    <Border Background="Transparent">
+                                                                        <Rectangle 
+                                                                            Fill="{DynamicResource ForegroundBrush}" 
+                                                                            Width="{Binding ElementName=MyContentPresenter, Path=ActualWidth}" 
+                                                                            Height="{Binding ElementName=MyContentPresenter, Path=ActualHeight}">
+                                                                            <Rectangle.OpacityMask>
+                                                                                <VisualBrush Stretch="None" Visual="{Binding ElementName=MyContentPresenter}"/>
+                                                                            </Rectangle.OpacityMask>
+                                                                        </Rectangle>
+                                                                    </Border>
+                                                                </Grid>
+                                                                <Viewbox.RenderTransform>
+                                                                    <ScaleTransform ScaleX="1" ScaleY="1" x:Name="ScaleTransform"/>
+                                                                </Viewbox.RenderTransform>
+                                                            </Viewbox>
+                                                        </Grid>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="Button.IsPressed" Value="True">
+                                                                <Trigger.EnterActions>
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <DoubleAnimation To="0.75" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                                                            <DoubleAnimation To="0.75" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </Trigger.EnterActions>
+                                                                <Trigger.ExitActions>
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                                                            <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </Trigger.ExitActions>
+                                                            </Trigger>
+                                                            <Trigger Property="Button.IsMouseOver" Value="True">
+                                                                <Trigger.EnterActions>
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <DoubleAnimation To="0.75" Duration="0:0:0.1" Storyboard.TargetProperty="Opacity"/>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </Trigger.EnterActions>
+                                                                <Trigger.ExitActions>
+                                                                    <BeginStoryboard>
+                                                                        <Storyboard>
+                                                                            <DoubleAnimation To="1" Duration="0:0:0.1" Storyboard.TargetProperty="Opacity"/>
+                                                                        </Storyboard>
+                                                                    </BeginStoryboard>
+                                                                </Trigger.ExitActions>
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Button.Template>
+                                            </Button>
+                                        </Grid>
+                                        <Border.Background>
+                                            <SolidColorBrush Color="{DynamicResource SecondaryForegroundColor}"/>
+                                        </Border.Background>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <EventTrigger RoutedEvent="TextBox.GotKeyboardFocus">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation To="0,0,0,2" Duration="0:0:0.1" Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderThickness"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                        <EventTrigger RoutedEvent="TextBox.LostKeyboardFocus">
+                                            <BeginStoryboard>
+                                                <Storyboard>
+                                                    <ThicknessAnimation To="0,0,0,0" Duration="0:0:0.1" Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderThickness"/>
+                                                </Storyboard>
+                                            </BeginStoryboard>
+                                        </EventTrigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </TextBox.Template>
+                        </TextBox>
+                    </Expander>
+                    <Grid>
+                        <TextBlock Text="Minimize To Tray" Style="{StaticResource NormalText}"/>
+                        <ToggleButton Name="MinimizeToTrayButton"/>
+                    </Grid>
+                    <Grid>
+                        <TextBlock Text="Redownload DLL" Style="{StaticResource NormalText}"/>
+                        <Button Name="RedownloadButton" VerticalAlignment="Center" HorizontalAlignment="Right" Click="RedownloadButton_OnClick" Content="Download" Margin="0,1,0,0" Template="{StaticResource SmallButtonStyle}" Cursor="Hand"/>
+                    </Grid>
+                    <TextBlock Text="Discord RPC" Style="{StaticResource HeaderText}"/>
+                    <Grid>
+                        <TextBlock Text="Enabled" Style="{StaticResource NormalText}"/>
+                        <ToggleButton Name="RPCEnabledButton"/>
+                    </Grid>
+                    <TextBlock Text="Friends" Style="{StaticResource HeaderText}"/>
+                    <TextBlock Text="Minecraft Username" Style="{StaticResource NormalText}"/>
+                    <TextBox Margin="25,0,0,5" Name="MCUsernameTextBox">
+                        <TextBox.Template>
+                            <ControlTemplate>
+                                <Border Padding="3.5"  CornerRadius="8" Name="Border" BorderThickness="0">
+                                    <Border.BorderBrush>
+                                        <SolidColorBrush Color="{DynamicResource AccentColor}"/>
+                                    </Border.BorderBrush>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBox BorderThickness="0" FontSize="14" FontFamily="/Assets/#Inter" Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" CaretBrush="{DynamicResource ForegroundBrush}" Foreground="{DynamicResource ForegroundBrush}" Background="Transparent"/>
+                                    </Grid>
+                                    <Border.Background>
+                                        <SolidColorBrush Color="{DynamicResource SecondaryForegroundColor}"/>
+                                    </Border.Background>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <EventTrigger RoutedEvent="TextBox.GotKeyboardFocus">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ThicknessAnimation To="0,0,0,2" Duration="0:0:0.1" Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderThickness"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                    <EventTrigger RoutedEvent="TextBox.LostKeyboardFocus">
+                                        <BeginStoryboard>
+                                            <Storyboard>
+                                                <ThicknessAnimation To="0,0,0,0" Duration="0:0:0.1" Storyboard.TargetName="Border" Storyboard.TargetProperty="BorderThickness"/>
+                                            </Storyboard>
+                                        </BeginStoryboard>
+                                    </EventTrigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </TextBox.Template>
+                    </TextBox>
+                    <Grid>
+                        <TextBlock Margin="15,0,0,0" VerticalAlignment="Top" Text="Configs" Style="{StaticResource HeaderText}"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
+                            <Button Name="RefreshButton" Click="RefreshButton_OnClick" Content="Refresh" Margin="0,1,0,0" Template="{StaticResource SmallButtonStyle}" Cursor="Hand"/>
+                            <Button Name="ImportButton" Click="ImportButton_OnClick" Content="Import" Margin="5,1,0,0" Template="{StaticResource SmallButtonStyle}" Cursor="Hand"/>
+                            <Button Name="ExportButton" Click="ExportButton_OnClick" Content="Export" Margin="5,1,0,0" Template="{StaticResource SmallButtonStyle}" Cursor="Hand"/>
+                        </StackPanel>   
+                        <Grid Margin="20,30,0,0">
+                            <Grid.Clip>
+                                <RectangleGeometry Rect="0,0,100000,500"/>
+                            </Grid.Clip>
+                            <StackPanel Name="ConfigStackPanel" Margin="-20,0,0,0"/>
+                        </Grid>
+                    </Grid>
+                    <TextBlock Text="Appearance" Style="{StaticResource HeaderText}"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Text="Accent Color" Style="{StaticResource NormalText}"/>
+                            <TextBlock Text="Window Color" Style="{StaticResource NormalText}"/>
+                            <TextBlock Text="Background Color" Style="{StaticResource NormalText}"/>
+                            <TextBlock Text="Foreground Color" Style="{StaticResource NormalText}"/>
+                            <TextBlock Text="Secondary Foreground Color" Style="{StaticResource NormalText}"/></StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <StackPanel Height="25" Orientation="Horizontal" Margin="0,3.18,0,3.18">
+                                <Border Background="{Binding ElementName=AccentColorTextBox, Path=Text, Converter={StaticResource HexToBrushConverter}}" Height="25" BorderBrush="{DynamicResource SecondaryForegroundBrush}" BorderThickness="1" Width="25" Margin="0,0,5,0" CornerRadius="7.5"/>
+                                <Border MinWidth="50" Background="{DynamicResource SecondaryForegroundBrush}" CornerRadius="7.5" Padding="5,2.5,5,2.5">
+                                    <TextBox Name="AccentColorTextBox" CaretBrush="{DynamicResource ForegroundBrush}" Text="#DD44DD" FontFamily="/Assets/#Inter" Background="Transparent" MinHeight="10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundBrush}" BorderThickness="0"/>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Height="25" Orientation="Horizontal" Margin="0,3.18,0,3.18">
+                                <Border Background="{Binding ElementName=WindowColorTextBox, Path=Text, Converter={StaticResource HexToBrushConverter}}" Height="25" BorderBrush="{DynamicResource SecondaryForegroundBrush}" BorderThickness="1" Width="25" Margin="0,0,5,0" CornerRadius="7.5"/>
+                                <Border MinWidth="50" Background="{DynamicResource SecondaryForegroundBrush}" CornerRadius="7.5" Padding="5,2.5,5,2.5">
+                                    <TextBox Name="WindowColorTextBox" CaretBrush="{DynamicResource ForegroundBrush}" Text="#0D0D11" FontFamily="/Assets/#Inter" Background="Transparent" MinHeight="10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundBrush}" BorderThickness="0"/>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Height="25" Orientation="Horizontal" Margin="0,3.18,0,3.18">
+                                <Border Background="{Binding ElementName=BackgroundColorTextBox, Path=Text, Converter={StaticResource HexToBrushConverter}}" Height="25" BorderBrush="{DynamicResource SecondaryForegroundBrush}" BorderThickness="1" Width="25" Margin="0,0,5,0" CornerRadius="7.5"/>
+                                <Border MinWidth="50" Background="{DynamicResource SecondaryForegroundBrush}" CornerRadius="7.5" Padding="5,2.5,5,2.5">
+                                    <TextBox Name="BackgroundColorTextBox" CaretBrush="{DynamicResource ForegroundBrush}" Text="#1C1D25" FontFamily="/Assets/#Inter" Background="Transparent" MinHeight="10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundBrush}" BorderThickness="0"/>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Height="25" Orientation="Horizontal" Margin="0,3.18,0,3.18">
+                                <Border Background="{Binding ElementName=ForegroundColorTextBox, Path=Text, Converter={StaticResource HexToBrushConverter}}" Height="25" BorderBrush="{DynamicResource SecondaryForegroundBrush}" BorderThickness="1" Width="25" Margin="0,0,5,0" CornerRadius="7.5"/>
+                                <Border MinWidth="50" Background="{DynamicResource SecondaryForegroundBrush}" CornerRadius="7.5" Padding="5,2.5,5,2.5">
+                                    <TextBox Name="ForegroundColorTextBox" CaretBrush="{DynamicResource ForegroundBrush}" Text="#FFFFFF" FontFamily="/Assets/#Inter" Background="Transparent" MinHeight="10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundBrush}" BorderThickness="0"/>
+                                </Border>
+                            </StackPanel>
+                            <StackPanel Height="25" Orientation="Horizontal" Margin="0,3.18,0,3.18">
+                                <Border Background="{Binding ElementName=SecondaryForegroundColorTextBox, Path=Text, Converter={StaticResource HexToBrushConverter}}" Height="25" BorderBrush="{DynamicResource SecondaryForegroundBrush}" BorderThickness="1" Width="25" Margin="0,0,5,0" CornerRadius="7.5"/>
+                                <Border MinWidth="50" Background="{DynamicResource SecondaryForegroundBrush}" CornerRadius="7.5" Padding="5,2.5,5,2.5">
+                                    <TextBox Name="SecondaryForegroundColorTextBox" CaretBrush="{DynamicResource ForegroundBrush}" Text="#523E59" FontFamily="/Assets/#Inter" Background="Transparent" MinHeight="10" HorizontalAlignment="Stretch" VerticalAlignment="Center" Foreground="{DynamicResource ForegroundBrush}" BorderThickness="0"/>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </ScrollViewer>
+            <Button Grid.Row="2" Width="100" Cursor="Hand" Click="ButtonBase_OnClick" Margin="15,7.5,0,15" VerticalAlignment="Bottom" HorizontalAlignment="Left">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Border Padding="12.5" CornerRadius="10" RenderTransformOrigin="0.5,0.5">
+                            <Border.Background>
+                                <SolidColorBrush Color="{DynamicResource AccentColor}"/>
+                            </Border.Background>
+                            <Border.RenderTransform>
+                                <ScaleTransform ScaleX="1" ScaleY="1" x:Name="ScaleTransform"/>
+                            </Border.RenderTransform>
+                            <Border.Effect>
+                                <DropShadowEffect Color="{DynamicResource AccentColor}" Opacity="0.5" ShadowDepth="0" BlurRadius="15"/>
+                            </Border.Effect>
+                            <TextBlock Text="Save" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBrush}" FontSize="16" FontFamily="/Assets/#Inter" FontWeight="SemiBold"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="Button.IsPressed" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.1" To="0.9" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                            <DoubleAnimation Duration="0:0:0.1" To="0.9" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
+                                            <DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                            <Trigger Property="Button.IsMouseOver" Value="True">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.1" To="0.75" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                                <Trigger.ExitActions>
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetProperty="Opacity"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.ExitActions>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+        </Grid>
+    </Border>
+</Page>

@@ -1,0 +1,42 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net8.0-windows10.0.22621.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <UseWPF>true</UseWPF>
+        <ApplicationIcon>Assets\lyra.ico</ApplicationIcon>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="DiscordRichPresence" Version="1.2.1.24" />
+      <PackageReference Include="FluentWPF" Version="0.10.2" />
+      <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="1.1.0" />
+      <PackageReference Include="Microsoft.Windows.CsWinRT" Version="2.0.7" />
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+      <PackageReference Include="System.Management" Version="9.0.0-preview.3.24172.9" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Assets\lyra.png" />
+      <None Remove="Assets\NewsIcon.png" />
+      <Resource Include="Assets\NewsIcon.png" />
+      <None Remove="Assets\PlayIcon.png" />
+      <Resource Include="Assets\PlayIcon.png" />
+      <None Remove="Assets\SettingsIcon.png" />
+      <Resource Include="Assets\SettingsIcon.png" />
+      <None Remove="Assets\LyraBackground.png" />
+      <Resource Include="Assets\LyraBackground.png" />
+      <None Remove="Assets\lyra.ico" />
+      <Resource Include="Assets\lyra.ico" />
+      <None Remove="Assets\folder.png" />
+      <Resource Include="Assets\folder.png" />
+      <None Remove="Assets\Inter.ttf" />
+      <Resource Include="Assets\Inter.ttf" />
+      <None Remove="Assets\IconMain.png" />
+      <Resource Include="Assets\IconMain.png" />
+      <None Remove="Assets\IconStar.png" />
+      <Resource Include="Assets\IconStar.png" />
+    </ItemGroup>
+</Project>
