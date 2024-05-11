@@ -19,12 +19,12 @@
             </BeginStoryboard>
         </EventTrigger>
     </UserControl.Triggers>
-    <Border CornerRadius="7.5" HorizontalAlignment="Right" Padding="7.5,5,7.5,5" Margin="0,5,0,0">
+    <Border CornerRadius="7.5" MaxWidth="580" HorizontalAlignment="Right" Padding="7.5,5,7.5,5" Margin="0,5,0,0">
             <Border.Background>
                 <SolidColorBrush Color="{DynamicResource AccentColor}" Opacity="1"/>
             </Border.Background>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Text="{Binding Message}" Foreground="{DynamicResource ForegroundBrush}" VerticalAlignment="Center"  FontWeight="Normal" FontFamily="/Assets/#Inter" FontSize="12" />
+            <StackPanel Orientation="Horizontal" MaxWidth="565">
+                <TextBlock Text="{Binding Message}" Foreground="{DynamicResource ForegroundBrush}" MaxWidth="547.5" VerticalAlignment="Center" TextWrapping="Wrap" FontWeight="Normal" FontFamily="/Assets/#Inter" FontSize="12" />
                 <Button Cursor="Hand" Margin="2.5,0,-2.5,0" Click="ButtonBase_OnClick">
                     <Button.Template>
                         <ControlTemplate>

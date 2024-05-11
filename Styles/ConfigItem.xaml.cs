@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using Lyra.Launcher.Functions;
 using Lyra.Launcher.Pages;
 using Microsoft.VisualBasic.ApplicationServices;
 
@@ -36,7 +37,7 @@ public partial class ConfigItem : UserControl
     private void Delete(object sender, RoutedEventArgs e)
     {
         File.Delete($"{SettingsPage.ConfigPath}\\{Tag}.json");
-        MainWindow.CreateNotification($"Deleted the \"{Tag}\" config");
+        MainWindow.CreateNotification(Utils.GetTranslation("Deleted the {0} config", [$"\"{Tag}\""]));
 
         var storyboard = new Storyboard();
         

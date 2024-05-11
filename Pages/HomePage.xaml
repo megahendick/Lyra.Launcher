@@ -43,7 +43,7 @@
                                         <RowDefinition Height="Auto"/>
                                         <RowDefinition Height="Auto"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock Foreground="{DynamicResource ForegroundBrush}" FontWeight="Bold" FontSize="22" Text="LAUNCH" FontFamily="/Assets/#Inter">
+                                    <TextBlock Foreground="{DynamicResource ForegroundBrush}" HorizontalAlignment="Center" FontWeight="Bold" FontSize="22" Text="{DynamicResource LAUNCH}" FontFamily="/Assets/#Inter">
                                         <TextBlock.Effect>
                                             <DropShadowEffect Color="{DynamicResource ForegroundColor}" ShadowDepth="0" BlurRadius="2.5"/>
                                         </TextBlock.Effect>
@@ -126,65 +126,12 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <TextBlock Name="SN" HorizontalAlignment="Center" FontSize="14" Grid.ColumnSpan="2" Text="temp" FontFamily="/Assets/#Inter" Foreground="{DynamicResource ForegroundBrush}" FontWeight="SemiBold"/>
-                <Button Click="AddServer" Name="AB" Tag="Add Server" Margin="0,5,0,0" Grid.Row="1" Cursor="Hand" VerticalAlignment="Bottom" HorizontalAlignment="Left">
-                <Button.Template>
-                    <ControlTemplate>
-                        <Border Padding="5" CornerRadius="5" RenderTransformOrigin="0.5,0.5">
-                            <Border.Background>
-                                <SolidColorBrush Color="{DynamicResource AccentColor}"/>
-                            </Border.Background>
-                            <Border.RenderTransform>
-                                <ScaleTransform ScaleX="1" ScaleY="1" x:Name="ScaleTransform"/>
-                            </Border.RenderTransform>
-                            <Border.Effect>
-                                <DropShadowEffect Color="{DynamicResource AccentColor}" Opacity="0.5" ShadowDepth="0" BlurRadius="15"/>
-                            </Border.Effect>
-                            <TextBlock Text="{TemplateBinding Button.Tag}" Foreground="{DynamicResource ForegroundBrush}" FontSize="12" FontFamily="/Assets/#Inter" FontWeight="SemiBold"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="Button.IsPressed" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Duration="0:0:0.1" To="0.9" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
-                                            <DoubleAnimation Duration="0:0:0.1" To="0.9" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleX"/>
-                                            <DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetName="ScaleTransform" Storyboard.TargetProperty="ScaleY"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                            <Trigger Property="Button.IsMouseOver" Value="True">
-                                <Trigger.EnterActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Duration="0:0:0.1" To="0.75" Storyboard.TargetProperty="Opacity"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.EnterActions>
-                                <Trigger.ExitActions>
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <DoubleAnimation Duration="0:0:0.1" To="1" Storyboard.TargetProperty="Opacity"/>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </Trigger.ExitActions>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-                <Button Content="Discord" Click="OpenDiscordLink" Grid.Column="1" Margin="5,5,0,0" Grid.Row="1" Template="{StaticResource SmallButtonStyle}" Cursor="Hand" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <Button Click="AddServer" Name="AB" Content="{DynamicResource 'Add Server'}" Template="{StaticResource SmallButtonStyle}" Margin="0,5,0,0" Grid.Row="1" Cursor="Hand" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+                <Button Content="{DynamicResource Discord}" Click="OpenDiscordLink" Grid.Column="1" Margin="5,5,0,0" Grid.Row="1" Template="{StaticResource SmallButtonStyle}" Cursor="Hand" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
             </Grid>
         </Border>
         
-        <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" MaxHeight="380" Margin="15,15,0,15">
+        <!--StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" MaxHeight="380" Margin="15,15,0,15">
             <Button Click="Toggle_Friends_List" HorizontalAlignment="Left" Cursor="Hand">
                 <Button.Template>
                     <ControlTemplate>
@@ -336,6 +283,6 @@
                     <fw:AcrylicBrush TargetName="Grid" NoiseOpacity="0" TintColor="White" TintOpacity="0.15"/>
                 </Border.Background>
             </Border>
-        </StackPanel>
+        </StackPanel-->
     </Grid>
 </Page>

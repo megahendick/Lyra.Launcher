@@ -6,12 +6,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Lyra.Launcher.Functions;
 using Lyra.Launcher.Styles;
 using Microsoft.Win32;
 using Newtonsoft.Json;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Lyra.Launcher.Pages;
 
@@ -38,8 +40,8 @@ public partial class HomePage : Page
         
         const string serversUrl = "https://raw.githubusercontent.com/megahendick/Lyra.Launcher.CDN/main/servers.json";
         
-        dispatcherTimer.Tick += dispatcherTimer_Tick;
-        dispatcherTimer.Interval = new TimeSpan(0,0,15);
+        //dispatcherTimer.Tick += dispatcherTimer_Tick;
+        //dispatcherTimer.Interval = new TimeSpan(0,0,15);
         
         try
         {
@@ -65,11 +67,11 @@ public partial class HomePage : Page
         }
         catch (Exception e)
         {
-            MainWindow.CreateNotification("Unable to get partnered servers");
+            MainWindow.CreateNotification(Utils.GetTranslation("Unable to get partnered servers"));
         }
     }
 
-    private void dispatcherTimer_Tick(object sender, EventArgs e)
+    /*private void dispatcherTimer_Tick(object sender, EventArgs e)
     {
         try
         {
@@ -117,7 +119,7 @@ public partial class HomePage : Page
         {
             MainWindow.CreateNotification("Unable to get friends");
         }
-    }
+    }*/
     
     private void HomePage_OnLoaded(object sender, RoutedEventArgs e)
     {
@@ -143,24 +145,35 @@ public partial class HomePage : Page
         await Task.Delay(200);
         ServerBorder.Visibility = Visibility.Hidden;
     }
-
-    private void LaunchButton_OnClick(object sender, RoutedEventArgs e)
+    
+    private async void LaunchButton_OnClick(object sender, RoutedEventArgs e)
     {
-        if (Config.UseCustomDLL)
-        {
-            Injector.Inject(Config.CustomDLLPath);
-        }
+        if (Config.UseCustomDLL) { Injector.Inject(Config.CustomDLLPath); }
         else
         {
+            if (MainWindow.VersionSupported)
+            {
+                var result = await MainWindow.CreateDialog(Utils.GetTranslation("Incompatible Version"), Utils.GetTranslation("The version you are using isn't compatible with the client, if you believe this is an error you can inject anyways or use a custom DLL"), [Utils.GetTranslation("Inject Anyways"), Utils.GetTranslation("Use Custom DLL"), Utils.GetTranslation("Cancel")]);
+                //MessageBox.Show($"Use Custom DLL == {result}\n{result == "Use Custom DLL"}");
+                switch (result)
+                {
+                    case 1:
+                        Injector.Inject(Config.CustomDLLPath);
+                        return;
+                    case 2:
+                        return;
+                }
+            }
+
             if (MainWindow.DllDownloadedFailed)
             {
-                MainWindow.CreateNotification("The DLL download failed, please check your internet connection or disable your antivirus software");
+                MainWindow.CreateNotification(Utils.GetTranslation("The DLL download failed, please check your internet connection or disable your antivirus software"));
                 return;
             }
             
             if (!MainWindow.DllDownloaded)
             {
-                MainWindow.CreateNotification("Please wait a few seconds for the dll to finish downloading");
+                MainWindow.CreateNotification(Utils.GetTranslation("Please wait a few seconds for the dll to finish downloading"));
                 return;
             }
 
@@ -168,7 +181,7 @@ public partial class HomePage : Page
         }
     }
 
-    private async void Toggle_Friends_List(object sender, RoutedEventArgs e)
+    /*private async void Toggle_Friends_List(object sender, RoutedEventArgs e)
     {
         dispatcherTimer_Tick(new object(), EventArgs.Empty);
         
@@ -189,7 +202,7 @@ public partial class HomePage : Page
                 FriendsBorder.Visibility = Visibility.Hidden;
                 break;
         }
-    }
+    }*/
 }
 
 public class Root

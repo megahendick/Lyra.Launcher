@@ -1,10 +1,13 @@
 ﻿using System.Net;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Effects;
+using Lyra.Launcher.Functions;
 using Lyra.Launcher.Styles;
 using Newtonsoft.Json;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace Lyra.Launcher.Pages;
 
@@ -29,8 +32,7 @@ public partial class NewsPage : Page
         Date = DateTextBlock;
         Body = BodyTextPanel;
         
-        string newsUrl = "https://raw.githubusercontent.com/megahendick/Lyra.Launcher.CDN/main/news.json";
-
+        var newsUrl = (string)App.Current.Resources["NewsUrl"];
         try
         {
             using (WebClient webClient = new WebClient())
@@ -54,7 +56,7 @@ public partial class NewsPage : Page
         }
         catch (Exception e)
         {
-            MainWindow.CreateNotification("Unable to get news");
+            MainWindow.CreateNotification(Utils.GetTranslation("Unable to get news"));
         }
     }
 

@@ -5,7 +5,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!--  FluentWPF Controls  -->
+                <ResourceDictionary Source="/Languages/English.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/FluentWPF;component/Styles/Controls.xaml" />
                 <ResourceDictionary Source="/Styles/SettingsPageStyles.xaml"/>
                 <ResourceDictionary Source="/Styles/ScrollBar.xaml"/>

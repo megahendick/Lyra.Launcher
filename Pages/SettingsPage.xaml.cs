@@ -13,7 +13,6 @@ using System.Windows.Media.Animation;
 using Lyra.Launcher.Functions;
 using Lyra.Launcher.Styles;
 using Microsoft.Win32;
-
 namespace Lyra.Launcher.Pages;
 
 public partial class SettingsPage : Page
@@ -28,7 +27,7 @@ public partial class SettingsPage : Page
         MinimizeToTrayButton.IsChecked = Config.CloseToTray;
         RPCEnabledButton.IsChecked = Config.RPCEnabled;
         CustomDLLTextBox.Text = Config.CustomDLLPath;
-        MCUsernameTextBox.Text = Config.MCUsername;
+        //MCUsernameTextBox.Text = Config.MCUsername;
 
         AccentColorTextBox.Text = App.Current.Resources["AccentColor"].ToString();
         WindowColorTextBox.Text = App.Current.Resources["WindowColor"].ToString();
@@ -48,34 +47,34 @@ public partial class SettingsPage : Page
     private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
     {
         if (Config.RPCEnabled != RPCEnabledButton.IsChecked)
-            MainWindow.CreateNotification("Please restart the launcher to apply these changes");
+            MainWindow.CreateNotification(Utils.GetTranslation("Please restart the launcher to apply these changes"));
         
         Config.UseCustomDLL = CustomDLLButton.IsChecked ?? false;
         Config.CloseToTray = MinimizeToTrayButton.IsChecked ?? false;
         Config.RPCEnabled = RPCEnabledButton.IsChecked ?? false;
         Config.CustomDLLPath = CustomDLLTextBox.Text;
-        Config.MCUsername = MCUsernameTextBox.Text;
+        //Config.MCUsername = MCUsernameTextBox.Text;
 
         try { App.Current.Resources["AccentColor"] = ColorConverter.ConvertFromString(AccentColorTextBox.Text); }
-        catch (Exception) { MainWindow.CreateNotification("Accent color is invalid"); }
+        catch (Exception) { MainWindow.CreateNotification(Utils.GetTranslation("Accent color is invalid")); }
         try { App.Current.Resources["WindowColor"] = ColorConverter.ConvertFromString(WindowColorTextBox.Text); }
-        catch (Exception) { MainWindow.CreateNotification("Window color is invalid"); }
+        catch (Exception) { MainWindow.CreateNotification(Utils.GetTranslation("Window color is invalid")); }
         try { App.Current.Resources["BackgroundColor"] = ColorConverter.ConvertFromString(BackgroundColorTextBox.Text); }
-        catch (Exception) { MainWindow.CreateNotification("Background color is invalid"); }
+        catch (Exception) { MainWindow.CreateNotification(Utils.GetTranslation("Background color is invalid")); }
         
         try
         {
             App.Current.Resources["ForegroundColor"] = ColorConverter.ConvertFromString(ForegroundColorTextBox.Text);
             App.Current.Resources["ForegroundBrush"] = (SolidColorBrush)new BrushConverter().ConvertFrom(ForegroundColorTextBox.Text);
         }
-        catch (Exception) { MainWindow.CreateNotification("Foreground color is invalid"); }
+        catch (Exception) { MainWindow.CreateNotification(Utils.GetTranslation("Foreground color is invalid")); }
         try
         {
             App.Current.Resources["SecondaryForegroundColor"] = ColorConverter.ConvertFromString(SecondaryForegroundColorTextBox.Text);
             App.Current.Resources["SecondaryForegroundBrush"] = (SolidColorBrush)new BrushConverter().ConvertFrom(SecondaryForegroundColorTextBox.Text);
 
         }
-        catch (Exception) { MainWindow.CreateNotification("Secondary foreground color is invalid"); }
+        catch (Exception) { MainWindow.CreateNotification(Utils.GetTranslation("Secondary foreground color is invalid")); }
 
         Config.saveConfig();
     }
@@ -96,11 +95,11 @@ public partial class SettingsPage : Page
     {
         if (!Directory.Exists(ConfigPath))
         {
-            MainWindow.CreateNotification("Config directory not found");
+            MainWindow.CreateNotification(Utils.GetTranslation("Config directory not found"));
             return;
         }
         
-        if ((string)ExportButton.Content == "Export")
+        if ((string)ExportButton.Content == Utils.GetTranslation("Export"))
         {
             Animations.ConfigStackPanelOpen(ConfigStackPanel);
 
@@ -109,10 +108,10 @@ public partial class SettingsPage : Page
                 configItem.IsChecked = false;
             }
             
-            ExportButton.Content = "Confirm";
-            ImportButton.Content = "Cancel";
+            ExportButton.Content = Utils.GetTranslation("Confirm");
+            ImportButton.Content = Utils.GetTranslation("Cancel");
         }
-        else if ((string)ExportButton.Content == "Confirm")
+        else if ((string)ExportButton.Content == Utils.GetTranslation("Confirm"))
         {
             var i = 0;
             var diag = new OpenFolderDialog();
@@ -129,13 +128,13 @@ public partial class SettingsPage : Page
                     i++;
                 }
                 
-                MainWindow.CreateNotification($"Exported {i} config(s) to {diag.FolderName}");
+                MainWindow.CreateNotification(Utils.GetTranslation("Exported {0} config(s) to {1}", [i.ToString(), diag.FolderName]));
             }
             
             Animations.ConfigStackPanelClose(ConfigStackPanel);
             
-            ExportButton.Content = "Export";
-            ImportButton.Content = "Import";
+            ExportButton.Content = Utils.GetTranslation("Export");
+            ImportButton.Content = Utils.GetTranslation("Import");
         }
     }
 
@@ -143,11 +142,11 @@ public partial class SettingsPage : Page
     {
         if (!Directory.Exists(ConfigPath))
         {
-            MainWindow.CreateNotification("Config directory not found");
+            MainWindow.CreateNotification(Utils.GetTranslation("Config directory not found"));
             return;
         }
         
-        if ((string)ImportButton.Content == "Import")
+        if ((string)ImportButton.Content == Utils.GetTranslation("Import"))
         {
             var diag = new OpenFileDialog()
             {
@@ -169,20 +168,20 @@ public partial class SettingsPage : Page
                 ConfigStackPanel.Children.Add(new ConfigItem{ Tag = path.Remove(path.Length - 5).Remove(0, ConfigPath.Length + 1) });
             }
         }
-        else if ((string)ImportButton.Content == "Cancel")
+        else if ((string)ImportButton.Content == Utils.GetTranslation("Cancel"))
         {
             Animations.ConfigStackPanelClose(ConfigStackPanel);
             
-            ExportButton.Content = "Export";
-            ImportButton.Content = "Import";
+            ExportButton.Content = Utils.GetTranslation("Export");
+            ImportButton.Content = Utils.GetTranslation("Import");
         }
     }
 
     private void RefreshButton_OnClick(object sender, RoutedEventArgs e)
     {
-        if (!Directory.Exists(ConfigPath))
+        if (Directory.Exists(ConfigPath))
         {
-            MainWindow.CreateNotification("Config directory not found");
+            MainWindow.CreateNotification(Utils.GetTranslation("Config directory not found"));
             return;
         }
         
@@ -198,27 +197,53 @@ public partial class SettingsPage : Page
     {
         MainWindow.DllDownloaded = false;
         MainWindow.DllDownloadedFailed = false;
-        RedownloadButton.Content = "Downloading DLL";
+        RedownloadButton.Content = Utils.GetTranslation("Downloading DLL");
         RedownloadButton.IsEnabled = false;
         
         try
         {
             using var client = new HttpClient();
-            using var s = await client.GetStreamAsync("https://raw.githubusercontent.com/megahendick/Lyra.Launcher.CDN/main/Lyra.dll");
-            using var fs = new FileStream(MainWindow.LauncherPath + "\\Lyra.dll", FileMode.OpenOrCreate);
+            await using var s = await client.GetStreamAsync("https://raw.githubusercontent.com/megahendick/Lyra.Launcher.CDN/main/Lyra.dll");
+            await using var fs = new FileStream(MainWindow.LauncherPath + "\\Lyra.dll", FileMode.OpenOrCreate);
             await s.CopyToAsync(fs);
 
             MainWindow.DllDownloaded = true;
-            MainWindow.CreateNotification("Successfully downloaded DLL");
+            MainWindow.CreateNotification(Utils.GetTranslation("Successfully downloaded DLL"));
         }
         catch (Exception)
         {
             MainWindow.DllDownloaded = false;
-            MainWindow.CreateNotification("Unable to download DLL");
+            MainWindow.CreateNotification(Utils.GetTranslation("Unable to download DLL"));
         }
         
-        RedownloadButton.Content = "Download";
+        RedownloadButton.Content = Utils.GetTranslation("Download");
         RedownloadButton.IsEnabled = true;
+    }
+
+    private void MinimizeFixEnableButton_OnClick(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            Minecraft.SetMinimizeFix(true);
+            MainWindow.CreateNotification(Utils.GetTranslation("Enabled MCBE minimize fix (this only needs to be set once and will continue working even without the launcher)"));
+        }
+        catch (Exception exception)
+        {
+            MainWindow.CreateNotification(Utils.GetTranslation("Unable to implement MCBE minimize fix"));
+        }        
+    }
+
+    private void MinimizeFixDisableButton_OnClick(object sender, RoutedEventArgs e)
+    { 
+        try
+        {
+            Minecraft.SetMinimizeFix(false);
+            MainWindow.CreateNotification(Utils.GetTranslation("Disabled MCBE minimize fix"));
+        }
+        catch (Exception exception)
+        {
+            MainWindow.CreateNotification(Utils.GetTranslation("Unable to remove MCBE minimize fix"));
+        }   
     }
 }
 

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
+using Lyra.Launcher.Functions;
 using Lyra.Launcher.Pages;
 
 namespace Lyra.Launcher.Styles;
@@ -38,14 +39,19 @@ public class ImageConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        if (value == null) return null;
-
-        string fullFilePath = value.ToString();
-
         BitmapImage bitmap = new();
-        bitmap.BeginInit();
-        bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
-        bitmap.EndInit();
+        try
+        {
+            string fullFilePath = value.ToString();
+
+            bitmap.BeginInit();
+            bitmap.UriSource = new Uri(fullFilePath, UriKind.Absolute);
+            bitmap.EndInit();
+        }
+        catch (Exception e)
+        {
+            MainWindow.CreateNotification(Utils.GetTranslation("Error finding icon of partnered server"));
+        }
 
         return bitmap;
     }

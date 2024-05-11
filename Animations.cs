@@ -1,6 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Effects;
 
 namespace Lyra.Launcher;
 
@@ -149,7 +151,7 @@ public class Animations
         storyboard.Begin(border);
     }
     
-    public static void FriendsListClose(Border border)
+    public static void FriendsListClose(FrameworkElement border)
     {
         var animation = new DoubleAnimation()
         {
@@ -163,7 +165,35 @@ public class Animations
         storyboard.Children.Add(animation);
         Storyboard.SetTarget(animation, border);
         Storyboard.SetTargetProperty(animation, new PropertyPath(UIElement.OpacityProperty));
+        storyboard.Begin();
+    }
+    
+    public static void BlurElement(FrameworkElement control, double fromRadius, double toRadius, TimeSpan duration)
+    {
+        var animation = new DoubleAnimation
+        {
+            From = fromRadius,
+            To = toRadius,
+            Duration = duration
+        };
+        control.Effect = new BlurEffect();
+        control.Effect.BeginAnimation(BlurEffect.RadiusProperty, animation);
+    }
+    
+    public static void AnimateBrushOpacity(SolidColorBrush brush, double fromRadius, double toRadius, TimeSpan duration)
+    {
+        var animation = new DoubleAnimation
+        {
+            From = fromRadius,
+            To = toRadius,
+            Duration = duration
+        };
         
-        storyboard.Begin(border);
+        var storyboard = new Storyboard();
+        storyboard.Children.Add(animation);
+        Storyboard.SetTarget(animation, brush);
+        Storyboard.SetTargetProperty(animation, new PropertyPath(Brush.OpacityProperty));
+        
+        storyboard.Begin();
     }
 }

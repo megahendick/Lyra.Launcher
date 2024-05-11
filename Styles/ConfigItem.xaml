@@ -83,8 +83,8 @@
         </CheckBox>
         <TextBlock Grid.Column="1" Margin="0,0,0,0" Text="{Binding Tag, RelativeSource={RelativeSource AncestorType=UserControl}}" Style="{StaticResource NormalText}"/>
         <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
-            <Button Margin="5,0,0,0" Click="Edit" Content="Edit" Cursor="Hand" Template="{StaticResource SmallButtonStyle}"/>
-            <Button Margin="5,0,0,0" Click="Delete" Content="Delete" Cursor="Hand" Template="{StaticResource SmallButtonStyle}"/>
+            <Button Margin="5,0,0,0" Click="Edit" Content="{DynamicResource Edit}" Cursor="Hand" Template="{StaticResource SmallButtonStyle}"/>
+            <Button Margin="5,0,0,0" Click="Delete" Content="{DynamicResource Delete}" Cursor="Hand" Template="{StaticResource SmallButtonStyle}"/>
         </StackPanel>
     </Grid>
 </UserControl>

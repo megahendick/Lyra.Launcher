@@ -46,7 +46,7 @@ public class Config
 
         File.WriteAllText(Path, tss);
 
-        MainWindow.CreateNotification("Settings Saved");
+        MainWindow.CreateNotification(Utils.GetTranslation("Settings Saved"));
     }
 
     public static void loadConfig()

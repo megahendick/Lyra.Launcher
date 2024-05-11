@@ -20,12 +20,12 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Text="Settings" Style="{StaticResource TitleText}"/>
+            <TextBlock Grid.Row="0" Text="{DynamicResource Settings}" Style="{StaticResource TitleText}"/>
             <ScrollViewer Grid.Row="1" Margin="0,10,10,0">
                 <StackPanel Margin="0,0,5,5">
-                    <TextBlock Margin="15,0,0,1" Text="General" Style="{StaticResource HeaderText}"/>
+                    <TextBlock Margin="15,0,0,1" Text="{DynamicResource General}" Style="{StaticResource HeaderText}"/>
                     <Grid>
-                        <TextBlock Text="Custom DLL" Style="{StaticResource NormalText}"/>
+                        <TextBlock Text="{DynamicResource 'Custom DLL'}" Style="{StaticResource NormalText}"/>
                         <ToggleButton Name="CustomDLLButton"/>
                     </Grid>
                     <Expander IsExpanded="{Binding ElementName=CustomDLLButton, Path=IsChecked}">
@@ -134,19 +134,26 @@
                         </TextBox>
                     </Expander>
                     <Grid>
-                        <TextBlock Text="Minimize To Tray" Style="{StaticResource NormalText}"/>
+                        <TextBlock Text="{DynamicResource 'Minimize To Tray'}" Style="{StaticResource NormalText}"/>
                         <ToggleButton Name="MinimizeToTrayButton"/>
                     </Grid>
                     <Grid>
-                        <TextBlock Text="Redownload DLL" Style="{StaticResource NormalText}"/>
-                        <Button Name="RedownloadButton" VerticalAlignment="Center" HorizontalAlignment="Right" Click="RedownloadButton_OnClick" Content="Download" Margin="0,1,0,0" Template="{StaticResource SmallButtonStyle}" Cursor="Hand"/>
+                        <TextBlock Text="{DynamicResource 'Redownload DLL'}" Style="{StaticResource NormalText}"/>
+                        <Button Name="RedownloadButton" VerticalAlignment="Center" HorizontalAlignment="Right" Click="RedownloadButton_OnClick" Content="{DynamicResource Download}" Margin="0,1,0,0" Template="{StaticResource SmallButtonStyle}" Cursor="Hand"/>
                     </Grid>
-                    <TextBlock Text="Discord RPC" Style="{StaticResource HeaderText}"/>
                     <Grid>
-                        <TextBlock Text="Enabled" Style="{StaticResource NormalText}"/>
+                        <TextBlock Text="{DynamicResource 'MCBE Minimize Fix'}" Style="{StaticResource NormalText}"/>
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                            <Button Name="MinimizeFixEnableButton" Click="MinimizeFixEnableButton_OnClick" Content="{DynamicResource Enable}" Margin="0,1,0,0" Template="{StaticResource SmallButtonStyle}" Cursor="Hand"/>
+                            <Button Name="MinimizeFixDisableButton" Click="MinimizeFixDisableButton_OnClick" Content="{DynamicResource Disable}" Margin="5,1,0,0" Template="{StaticResource SmallButtonStyle}" Cursor="Hand"/>
+                        </StackPanel>
+                    </Grid>
+                    <TextBlock Text="{DynamicResource 'Discord RPC'}" Style="{StaticResource HeaderText}"/>
+                    <Grid>
+                        <TextBlock Text="{DynamicResource Enabled}" Style="{StaticResource NormalText}"/>
                         <ToggleButton Name="RPCEnabledButton"/>
                     </Grid>
-                    <TextBlock Text="Friends" Style="{StaticResource HeaderText}"/>
+                    <!--TextBlock Text="Friends" Style="{StaticResource HeaderText}"/>
                     <TextBlock Text="Minecraft Username" Style="{StaticResource NormalText}"/>
                     <TextBox Margin="25,0,0,5" Name="MCUsernameTextBox">
                         <TextBox.Template>
@@ -184,13 +191,13 @@
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
                         </TextBox.Template>
-                    </TextBox>
+                    </TextBox-->
                     <Grid>
-                        <TextBlock Margin="15,0,0,0" VerticalAlignment="Top" Text="Configs" Style="{StaticResource HeaderText}"/>
+                        <TextBlock Margin="15,0,0,0" VerticalAlignment="Top" Text="{DynamicResource Configs}" Style="{StaticResource HeaderText}"/>
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right">
-                            <Button Name="RefreshButton" Click="RefreshButton_OnClick" Content="Refresh" Margin="0,1,0,0" Template="{StaticResource SmallButtonStyle}" Cursor="Hand"/>
-                            <Button Name="ImportButton" Click="ImportButton_OnClick" Content="Import" Margin="5,1,0,0" Template="{StaticResource SmallButtonStyle}" Cursor="Hand"/>
-                            <Button Name="ExportButton" Click="ExportButton_OnClick" Content="Export" Margin="5,1,0,0" Template="{StaticResource SmallButtonStyle}" Cursor="Hand"/>
+                            <Button Name="RefreshButton" Click="RefreshButton_OnClick" Content="{DynamicResource Refresh}" Margin="0,1,0,0" Template="{StaticResource SmallButtonStyle}" Cursor="Hand"/>
+                            <Button Name="ImportButton" Click="ImportButton_OnClick" Content="{DynamicResource Import}" Margin="5,1,0,0" Template="{StaticResource SmallButtonStyle}" Cursor="Hand"/>
+                            <Button Name="ExportButton" Click="ExportButton_OnClick" Content="{DynamicResource Export}" Margin="5,1,0,0" Template="{StaticResource SmallButtonStyle}" Cursor="Hand"/>
                         </StackPanel>   
                         <Grid Margin="20,30,0,0">
                             <Grid.Clip>
@@ -199,18 +206,18 @@
                             <StackPanel Name="ConfigStackPanel" Margin="-20,0,0,0"/>
                         </Grid>
                     </Grid>
-                    <TextBlock Text="Appearance" Style="{StaticResource HeaderText}"/>
+                    <TextBlock Text="{DynamicResource Appearance}" Style="{StaticResource HeaderText}"/>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                            <TextBlock Text="Accent Color" Style="{StaticResource NormalText}"/>
-                            <TextBlock Text="Window Color" Style="{StaticResource NormalText}"/>
-                            <TextBlock Text="Background Color" Style="{StaticResource NormalText}"/>
-                            <TextBlock Text="Foreground Color" Style="{StaticResource NormalText}"/>
-                            <TextBlock Text="Secondary Foreground Color" Style="{StaticResource NormalText}"/></StackPanel>
+                            <TextBlock Text="{DynamicResource 'Accent Color'}" Style="{StaticResource NormalText}"/>
+                            <TextBlock Text="{DynamicResource 'Window Color'}" Style="{StaticResource NormalText}"/>
+                            <TextBlock Text="{DynamicResource 'Background Color'}" Style="{StaticResource NormalText}"/>
+                            <TextBlock Text="{DynamicResource 'Foreground Color'}" Style="{StaticResource NormalText}"/>
+                            <TextBlock Text="{DynamicResource 'Secondary Foreground Color'}" Style="{StaticResource NormalText}"/></StackPanel>
                         <StackPanel Grid.Column="1">
                             <StackPanel Height="25" Orientation="Horizontal" Margin="0,3.18,0,3.18">
                                 <Border Background="{Binding ElementName=AccentColorTextBox, Path=Text, Converter={StaticResource HexToBrushConverter}}" Height="25" BorderBrush="{DynamicResource SecondaryForegroundBrush}" BorderThickness="1" Width="25" Margin="0,0,5,0" CornerRadius="7.5"/>
@@ -259,7 +266,7 @@
                             <Border.Effect>
                                 <DropShadowEffect Color="{DynamicResource AccentColor}" Opacity="0.5" ShadowDepth="0" BlurRadius="15"/>
                             </Border.Effect>
-                            <TextBlock Text="Save" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBrush}" FontSize="16" FontFamily="/Assets/#Inter" FontWeight="SemiBold"/>
+                            <TextBlock Text="{DynamicResource Save}" HorizontalAlignment="Center" Foreground="{DynamicResource ForegroundBrush}" FontSize="16" FontFamily="/Assets/#Inter" FontWeight="SemiBold"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="Button.IsPressed" Value="True">

@@ -1,0 +1,86 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:System">
+    <!--Home Page-->
+        <s:String x:Key="LAUNCH">LAUNCH</s:String>
+        <s:String x:Key="Add Server">Add Server</s:String>
+        <s:String x:Key="Discord">Discord</s:String>
+    <!--News Page-->
+        <s:String x:Key="Newsfeed">Newsfeed</s:String>
+    <!--Settings Page-->
+        <s:String x:Key="Settings">Settings</s:String>
+        <s:String x:Key="Save">Save</s:String>
+        <!--General-->
+            <s:String x:Key="General">General</s:String>
+            <s:String x:Key="Custom DLL">Custom DLL</s:String>
+            <s:String x:Key="Minimize To Tray">Minimize To Tray</s:String>
+            <s:String x:Key="Redownload DLL">Redownload DLL</s:String>
+            <s:String x:Key="MCBE Minimize Fix">MCBE Minimize Fix</s:String>
+            <s:String x:Key="Download">Download</s:String>
+            <s:String x:Key="Enable">Enable</s:String>
+            <s:String x:Key="Disable">Disable</s:String>
+        <!--Discord RPC-->
+            <s:String x:Key="Discord RPC">Discord RPC</s:String>
+            <s:String x:Key="Enabled">Enabled</s:String>
+        <!--Configs-->
+            <s:String x:Key="Configs">Configs</s:String>
+            <s:String x:Key="Refresh">Refresh</s:String>
+            <s:String x:Key="Import">Import</s:String>
+            <s:String x:Key="Export">Export</s:String>
+            <s:String x:Key="Edit">Edit</s:String>
+            <s:String x:Key="Delete">Delete</s:String>
+        <!--Appearance-->
+            <s:String x:Key="Appearance">Appearance</s:String>
+            <s:String x:Key="Accent Color">Accent Color</s:String>
+            <s:String x:Key="Window Color">Window Color</s:String>
+            <s:String x:Key="Background Color">Background Color</s:String>
+            <s:String x:Key="Foreground Color">Foreground Color</s:String>
+            <s:String x:Key="Secondary Foreground Color">Secondary Foreground Color</s:String>
+    <!--Notifications-->
+        <s:String x:Key="Config directory not found">Config directory not found</s:String>
+        <s:String x:Key="Successfully downloaded DLL">Successfully downloaded DLL</s:String>
+        <s:String x:Key="Unable to download DLL">Unable to download DLL</s:String>
+        <s:String x:Key="Disabled MCBE minimize fix">Disabled MCBE minimize fix</s:String>
+        <s:String x:Key="Unable to remove MCBE minimize fix">Unable to remove MCBE minimize fix</s:String>
+        <s:String x:Key="Enabled MCBE minimize fix (this only needs to be set once and will continue working even without the launcher)">Enabled MCBE minimize fix (this only needs to be set once and will continue working even without the launcher)</s:String>
+        <s:String x:Key="Unable to implement MCBE minimize fix">Unable to implement MCBE minimize fix</s:String>
+        <s:String x:Key="Secondary foreground color is invalid">Secondary foreground color is invalid</s:String>
+        <s:String x:Key="Foreground color is invalid">Foreground color is invalid</s:String>
+        <s:String x:Key="Background color is invalid">Background color is invalid</s:String>
+        <s:String x:Key="Window color is invalid">Window color is invalid</s:String>
+        <s:String x:Key="Accent color is invalid">Accent color is invalid</s:String>
+        <s:String x:Key="Please restart the launcher to apply these changes">Please restart the launcher to apply these changes</s:String>
+        <s:String x:Key="Unable to find minecraft version, please try running the launcher as admin">Unable to find minecraft version, please try running the launcher as admin</s:String>
+        <s:String x:Key="Unknown Version">Unknown Version</s:String>
+        <!-- {0} = number, {1} = path -->
+        <s:String x:Key="Exported {0} config(s) to {1}">Exported {0} config(s) to {1}</s:String>
+        <!-- {0} = current version, {1} = supported versions -->
+        <s:String x:Key="{}{0} is unsupported, please use one of the following versions: {1}">{0} is unsupported, please use one of the following versions: {1}</s:String>
+        <s:String x:Key="Unable to get supported versions">Unable to get supported versions</s:String>
+        <s:String x:Key="The DLL download failed, please check your internet connection or disable your antivirus software">The DLL download failed, please check your internet connection or disable your antivirus software</s:String>
+        <s:String x:Key="Please wait a few seconds for the DLL to finish downloading">Please wait a few seconds for the DLL to finish downloading</s:String>
+        <s:String x:Key="Unable to get partnered servers">Unable to get partnered servers</s:String>
+        <s:String x:Key="Custom DLL path not found">Custom DLL path not found</s:String>
+        <s:String x:Key="DLL not found, your Antivirus might have deleted it.">DLL not found, your Antivirus might have deleted it.</s:String>
+        <s:String x:Key="DLL broken (Less than 10 bytes)">DLL broken (Less than 10 bytes)</s:String>
+        <s:String x:Key="Could not set permissions">Could not set permissions</s:String>
+        <s:String x:Key="Failed to launch Minecraft (Is it installed?)">Failed to launch Minecraft (Is it installed?)</s:String>
+        <s:String x:Key="Minecraft launch took too long.">Minecraft launch took too long.</s:String>
+        <s:String x:Key="Already injected!">Already injected!</s:String>
+        <s:String x:Key="Failed to get process handle">Failed to get process handle</s:String>
+        <s:String x:Key="Failed to create remote thread">Failed to create remote thread</s:String>
+        <!-- {0} = config name --> 
+        <s:String x:Key="Deleted the {0} config">Deleted the {0} config</s:String>
+        <s:String x:Key="Error finding icon of partnered server">Error finding icon of partnered server</s:String>
+        <s:String x:Key="Unable to get news">Unable to get news</s:String>
+        <s:String x:Key="Settings Saved">Settings Saved</s:String>
+    <!--Misc-->
+        <s:String x:Key="Downloading DLL">Downloading DLL</s:String>
+        <s:String x:Key="Cancel">Cancel</s:String>
+        <s:String x:Key="Confirm">Confirm</s:String>
+        <s:String x:Key="Incompatible Version">Incompatible Version</s:String>
+        <s:String x:Key="The version you are using isn't compatible with the client, if you believe this is an error you can inject anyways or use a custom DLL">The version you are using isn't compatible with the client, if you believe this is an error you can inject anyways or use a custom DLL</s:String>
+        <s:String x:Key="Inject Anyways">Inject Anyways</s:String>
+        <s:String x:Key="Use Custom DLL">Use Custom DLL</s:String>
+        <s:String x:Key="NewsUrl">https://raw.githubusercontent.com/megahendick/Lyra.Launcher.CDN/main/news.json</s:String>
+</ResourceDictionary>

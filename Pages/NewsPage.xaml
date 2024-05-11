@@ -20,7 +20,7 @@
                 <ScrollViewer Margin="10,40,-5,0" HorizontalAlignment="Center">
                     <WrapPanel Name="WrapPanel" Margin="0,0,15,0" Orientation="Horizontal"/>
                 </ScrollViewer>
-                <TextBlock Text="Newsfeed" Margin="0,10,0,0" VerticalAlignment="Top" Style="{StaticResource TitleText}"/>
+                <TextBlock Text="{DynamicResource Newsfeed}" Margin="0,10,0,0" VerticalAlignment="Top" Style="{StaticResource TitleText}"/>
             </Grid>
             <Border Name="Border" Visibility="Hidden" CornerRadius="15" Margin="-15">
                 <Border.Background>

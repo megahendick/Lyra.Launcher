@@ -47,15 +47,21 @@ public class Injector
 
         public static async void Inject(string path)
         {
+            if (!File.Exists(path) && Config.UseCustomDLL)
+            {
+                MainWindow.CreateNotification(Utils.GetTranslation("Custom DLL path not found"));
+                goto done;
+            }
+            
             if (!File.Exists(path))
             {
-                MainWindow.CreateNotification("DLL not found, your Antivirus might have deleted it.");
+                MainWindow.CreateNotification(Utils.GetTranslation("DLL not found, your Antivirus might have deleted it."));
                 goto done;
             }
 
             if (File.ReadAllBytes(path).Length < 10)
             {
-                MainWindow.CreateNotification("DLL broken (Less than 10 bytes)");
+                MainWindow.CreateNotification(Utils.GetTranslation("DLL broken (Less than 10 bytes)"));
                 goto done;
             }
 
@@ -68,7 +74,7 @@ public class Injector
             }
             catch (Exception)
             {
-                MainWindow.CreateNotification("Could not set permissions");
+                MainWindow.CreateNotification(Utils.GetTranslation("Could not set permissions"));
                 goto done;
             }
 
@@ -77,7 +83,7 @@ public class Injector
             {
                 if (Interaction.Shell("explorer.exe shell:appsFolder\\Microsoft.MinecraftUWP_8wekyb3d8bbwe!App", Wait: false) == 0)
                 {
-                    MainWindow.CreateNotification("Failed to launch Minecraft (Is it installed?)");
+                    MainWindow.CreateNotification(Utils.GetTranslation("Failed to launch Minecraft (Is it installed?)"));
                     goto done;
                 }
 
@@ -86,7 +92,7 @@ public class Injector
                 {
                     if (++t > 200)
                     {
-                        MainWindow.CreateNotification("Minecraft launch took too long.");
+                        MainWindow.CreateNotification(Utils.GetTranslation("Minecraft launch took too long."));
                         return;
                     }
 
@@ -102,7 +108,7 @@ public class Injector
             {
                 if (process.Modules[i].FileName == path)
                 {
-                    MainWindow.CreateNotification("Already injected!");
+                    MainWindow.CreateNotification(Utils.GetTranslation("Already injected!"));
                     goto done;
                 }
             }
@@ -110,7 +116,7 @@ public class Injector
             IntPtr handle = OpenProcess((IntPtr)2035711, false, (uint)process.Id);
             if (handle == IntPtr.Zero || !process.Responding)
             {
-                MainWindow.CreateNotification("Failed to get process handle");
+                MainWindow.CreateNotification(Utils.GetTranslation("Failed to get process handle"));
                 goto done;
             }
 
@@ -120,7 +126,7 @@ public class Injector
             IntPtr p3 = CreateRemoteThread(handle, IntPtr.Zero, 0U, procAddress, p1, 0U, ref p2);
             if (p3 == IntPtr.Zero)
             {
-                MainWindow.CreateNotification("Failed to create remote thread");
+                MainWindow.CreateNotification(Utils.GetTranslation("Failed to create remote thread"));
                 goto done;
             }
 
